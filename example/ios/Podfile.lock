@@ -2,20 +2,26 @@ PODS:
   - Flutter (1.0.0)
   - flutter_photokit (0.0.1):
     - Flutter
+  - path_provider (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - Flutter (from `.symlinks/flutter/ios`)
   - flutter_photokit (from `.symlinks/plugins/flutter_photokit/ios`)
+  - path_provider (from `.symlinks/plugins/path_provider/ios`)
 
 EXTERNAL SOURCES:
   Flutter:
     :path: ".symlinks/flutter/ios"
   flutter_photokit:
     :path: ".symlinks/plugins/flutter_photokit/ios"
+  path_provider:
+    :path: ".symlinks/plugins/path_provider/ios"
 
 SPEC CHECKSUMS:
   Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
   flutter_photokit: 6f4a40a993b110c8a9743b8545d8572c5d65b251
+  path_provider: 09407919825bfe3c2deae39453b7a5b44f467873
 
 PODFILE CHECKSUM: 7765ea4305eaab0b3dfd384c7de11902aa3195fd
 
