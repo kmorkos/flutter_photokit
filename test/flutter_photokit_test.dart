@@ -1,6 +1,4 @@
-@OnPlatform(const {
-  '!ios': const Skip('Plugin only available for iOS')
-})
+@OnPlatform(const {'!ios': const Skip('Plugin only available for iOS')})
 
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -11,8 +9,7 @@ void main() {
   final String mockAlbumName = 'MySampleAlbum';
 
   group('$FlutterPhotokit', () {
-    const MethodChannel channel =
-        MethodChannel('flutter_photokit');
+    const MethodChannel channel = MethodChannel('flutter_photokit');
 
     final List<MethodCall> log = <MethodCall>[];
 
@@ -27,7 +24,8 @@ void main() {
 
     group('#saveToAlbum', () {
       test('passes the arguments correctly', () async {
-        await FlutterPhotokit.saveToAlbum(filePath: mockFilePath, albumName: mockAlbumName);
+        await FlutterPhotokit.saveToAlbum(
+            filePath: mockFilePath, albumName: mockAlbumName);
 
         expect(
           log,
@@ -48,9 +46,8 @@ void main() {
         expect(
           log,
           <Matcher>[
-            isMethodCall('saveToCameraRoll', arguments: <String, dynamic>{
-              'filePath': mockFilePath
-            }),
+            isMethodCall('saveToCameraRoll',
+                arguments: <String, dynamic>{'filePath': mockFilePath}),
           ],
         );
       });

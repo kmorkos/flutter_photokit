@@ -7,16 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_photokit/flutter_photokit.dart';
 import 'package:path_provider/path_provider.dart';
 
+enum _SaveStatus { NONE, SAVING, SAVED }
+
 void main() => runApp(const MyApp());
 
-enum _SaveStatus {
-  NONE,
-  SAVING,
-  SAVED
-}
-
 class MyApp extends StatefulWidget {
-  const MyApp({ Key key }) : super(key: key);
+  const MyApp({Key key}) : super(key: key);
 
   @override
   _MyAppState createState() => new _MyAppState();
@@ -28,7 +24,8 @@ class _MyAppState extends State<MyApp> {
   TextEditingController _albumTextController;
 
   static HttpClient _httpClient = HttpClient();
-  static String _sampleImageUrl = 'https://cdn-images-1.medium.com/max/1200/1*5-aoK8IBmXve5whBQM90GA.png';
+  static String _sampleImageUrl =
+      'https://cdn-images-1.medium.com/max/1200/1*5-aoK8IBmXve5whBQM90GA.png';
   // Use this link to test with a video.
   // static String _sampleVideoUrl = 'https://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4';
 
@@ -58,11 +55,7 @@ class _MyAppState extends State<MyApp> {
     setState(() => _cameraRollStatus = _SaveStatus.SAVING);
 
     File file = await _downloadFile(_sampleImageUrl);
-    print('Downloaded file');
-    await FlutterPhotokit.saveToCameraRoll(
-      filePath: file.path
-    );
-    print('Saved file to camera roll');
+    await FlutterPhotokit.saveToCameraRoll(filePath: file.path);
 
     setState(() => _cameraRollStatus = _SaveStatus.SAVED);
   }
@@ -71,12 +64,8 @@ class _MyAppState extends State<MyApp> {
     setState(() => _albumStatus = _SaveStatus.SAVING);
 
     File file = await _downloadFile(_sampleImageUrl);
-    print('Downloaded file...');
     await FlutterPhotokit.saveToAlbum(
-      filePath: file.path,
-      albumName: _albumTextController.value.text
-    );
-    print('Saved file to album');
+        filePath: file.path, albumName: _albumTextController.value.text);
 
     setState(() => _albumStatus = _SaveStatus.SAVED);
   }
@@ -85,32 +74,29 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return new MaterialApp(
       home: new Scaffold(
-        appBar: new AppBar(
-          title: const Text('Flutter PhotoKit Example'),
-        ),
-        body: _appBody()
-      ),
+          appBar: new AppBar(
+            title: const Text('Flutter PhotoKit Example'),
+          ),
+          body: _appBody()),
     );
   }
 
   Widget _appBody() {
     if (Platform.isIOS) {
       return SingleChildScrollView(
-        child: new Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            Image.network(_sampleImageUrl),
-            SizedBox(height: 16.0),
-            _saveToCameraRollRow(),
-            SizedBox(height: 16.0),
-            _saveToAlbumRow()
-          ],
-        )
-      );
+          child: new Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          Image.network(_sampleImageUrl),
+          SizedBox(height: 16.0),
+          _saveToCameraRollRow(),
+          SizedBox(height: 16.0),
+          _saveToAlbumRow()
+        ],
+      ));
     } else {
       return Center(
-        child: Text('The PhotoKit plugin is only available for iOS!')
-      );
+          child: Text('The PhotoKit plugin is only available for iOS!'));
     }
   }
 
@@ -118,15 +104,11 @@ class _MyAppState extends State<MyApp> {
     switch (_cameraRollStatus) {
       case _SaveStatus.NONE:
         return RaisedButton(
-          onPressed: _saveToCameraRoll,
-          child: Text('Save to Camera Roll')
-        );
+            onPressed: _saveToCameraRoll, child: Text('Save to Camera Roll'));
       case _SaveStatus.SAVING:
         return CircularProgressIndicator();
       case _SaveStatus.SAVED:
-        return Icon(
-          Icons.check
-        );
+        return Icon(Icons.check);
     }
   }
 
@@ -137,16 +119,13 @@ class _MyAppState extends State<MyApp> {
           children: <Widget>[
             Expanded(
               child: TextField(
-                controller: _albumTextController,
-                decoration: InputDecoration(
-                  labelText: 'Album name'
-                )
-              ),
+                  controller: _albumTextController,
+                  decoration: InputDecoration(labelText: 'Album name')),
             ),
             RaisedButton(
               onPressed: _albumTextController.value.text.trim().isEmpty
-                ? null
-                : _saveToAlbum,
+                  ? null
+                  : _saveToAlbum,
               child: Text('Save to album'),
             )
           ],
@@ -154,9 +133,7 @@ class _MyAppState extends State<MyApp> {
       case _SaveStatus.SAVING:
         return CircularProgressIndicator();
       case _SaveStatus.SAVED:
-        return Icon(
-          Icons.check
-        );
+        return Icon(Icons.check);
     }
   }
 }
