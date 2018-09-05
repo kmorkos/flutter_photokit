@@ -3,7 +3,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'flutter_photokit'
-  s.version          = '0.0.1'
+  s.version          = '0.1'
   s.summary          = 'Flutter plugin for interacting with PhotoKit on iOS.'
   s.description      = <<-DESC
 Flutter plugin for interacting with PhotoKit on iOS.

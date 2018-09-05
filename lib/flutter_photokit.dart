@@ -8,6 +8,8 @@ class FlutterPhotokit {
   static const MethodChannel _channel =
       const MethodChannel('flutter_photokit');
 
+  FlutterPhotokit._();
+
   /// Saves the file at [filePath] to [albumName].
   /// 
   /// [filePath] must contain either an image or video file.

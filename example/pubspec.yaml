@@ -9,14 +9,14 @@ dependencies:
   flutter:
     sdk: flutter
 
+  path_provider: 0.4.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_photokit:
     path: ../
-
-  path_provider: 0.4.1
 
 flutter:
   uses-material-design: true
